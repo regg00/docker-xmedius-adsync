@@ -1,0 +1,51 @@
+fax_service:
+  address: #####Enter your account Home Page URL, for example "https://portal.xmedius.com/enterprises/[account_permalink]"
+  access_token: #####Enter an Access Token with the 'Manage users' and 'Query user directory' permissions
+  disable_emails: false
+
+active_directory:
+  address: #####Enter the address of your LDAP server
+  port: 389
+  username: #####Enter the name of an account with read only privileges on your Active Directory and on the Deleted Objects container
+  password: #####Enter the password of the user specified above
+
+  #Below are default search parameters for active directory
+  search_nodes:
+    query_for_users:
+      -
+        base: #####Enter the distinguished name of the user object container, for example "CN=Users,DC=example,DC=com"
+        scope: "SUBTREE"
+        filter: "(&(objectCategory=person)(objectClass=user))"
+        exclusion :
+          mail :
+            - "FederatedEmail*"
+            - "SystemMailbox*"
+            - "DiscoverySearchMailbox*"
+    query_for_deleted_users:
+      -
+        base: #####Enter the distinguished name of the deleted object container, for example "CN=Deleted Objects,DC=example,DC=com"
+        scope: "SUBTREE"
+        filter: "(&(objectClass=user)(isDeleted=TRUE))"
+
+#Attribute mapping for portal attributes vs active directory attributes
+attributes_mapping:
+
+  #Default attribute name for grouping users is ExtractGroupNameFromDn, this can change depending on your active directory configuration.
+  group_id: "ExtractGroupNameFromDn"
+  #The following attributes should not change
+  address: "streetAddress"
+  city: "l"
+  company_name: "company"
+  country: "c"
+  email: "mail"
+  external_id: "objectGUID"
+  first_name: "givenName"
+  job_title: "title"
+  language: "preferredLanguage"
+  last_name: "sn"
+  main_fax_number_id: "facsimileTelephoneNumber"
+  mobile_number: "mobile"
+  phone_number: "telephoneNumber"
+  state: "st"
+  username: "sAMAccountName"
+  zip_code: "postalCode"
