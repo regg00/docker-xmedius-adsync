@@ -81,4 +81,4 @@ If that helped you, let me know by email. You can also support me with this link
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
